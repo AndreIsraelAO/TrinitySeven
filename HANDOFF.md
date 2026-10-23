@@ -24,6 +24,9 @@ Protocol from `EasySaveHelper`: POST fields `tag` (user id), `password`, `mode` 
 - `AdManager.IsVideoSkip` (0xE321F4): the game's own paid "skip video ads" state, so video rewards need no AdMob. Not yet exercised on screen (the features unlock later in progression).
 - `NetworkHelper.IsCanConnectNetwork` (0xEF483C): the backend is local, so always reachable. Verified in airplane mode.
 
+## Language choice at build time
+The forced `Locale` decides the game language: `Locale.JAPAN` keeps the Japanese UI, `Locale.US` gives English (title, buttons, terms, chapter titles verified on the emulator; story dialogue not checked). Both use a decimal point, so the locale bug stays fixed. `build.py --lang ja|en` substitutes the locale in a copy of `StubProvider.java` before compiling (default `ja`; the flag is `ja`, not `jp`, to match the language code). Idea: pick the language on the device instead of at build time, for example a setting read by `StubProvider` before it calls `Locale.setDefault`, so one APK serves both.
+
 ## Save data
 `Android/data/com.avex.trinityseven/files/es2/` (Easy Save, mostly encrypted; `STAGE_DATA` readable base64 BinaryFormatter). Servant ownership key: `SERVANT_LV_SAVE_KEY_<id>`.
 
