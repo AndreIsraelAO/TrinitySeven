@@ -1,0 +1,29 @@
+name: Bug report
+description: The game crashed, showed an error, or something does not work as described in the README
+labels: [bug]
+body:
+  - type: input
+    id: device
+    attributes: {label: Phone model, placeholder: Xiaomi Redmi Note 11}
+    validations: {required: true}
+  - type: input
+    id: android
+    attributes: {label: Android version, placeholder: "13"}
+    validations: {required: true}
+  - type: input
+    id: system-language
+    attributes: {label: System language, placeholder: Portuguese (Brazil)}
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes: {label: Patch version and language build, placeholder: "0.9, ja"}
+    validations: {required: true}
+  - type: textarea
+    id: steps
+    attributes: {label: Steps to reproduce, description: "What you did, what you expected and what happened."}
+    validations: {required: true}
+  - type: textarea
+    id: extras
+    attributes:
+      label: Screenshot and log (optional)
+      description: "Drag the image here. For the log, run `adb logcat -d > log.txt` right after the error and attach the file."
