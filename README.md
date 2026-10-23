@@ -42,7 +42,7 @@ Os dados do jogo (personagens, inimigos, fases, tutorial) já estão dentro do A
 #### 3. Correção do inimigo que não morria e do tutorial que não aparecia
 Em aparelhos com idioma que usa **vírgula decimal** (português, espanhol, francês, alemão…), `EnemyManager.UpdateHpBar` chama `Single.Parse`, que lança exceção. O inimigo nunca é marcado como "existente": a barra de HP fica vazia, nenhum dano é aplicado, os toques viram bolas no tabuleiro e os diálogos do tutorial não continuam.
 O servidor embutido força a cultura **ja-JP** (`Locale.setDefault`, também com ponto decimal) na abertura do app e de novo antes da Activity do Unity, porque o Android reaplica o idioma do sistema nesse momento.
-Como o idioma forçado é o japonês, os textos ficam como no original.
+O idioma forçado é o japonês por padrão, com os textos como no original; `build.py --lang en` força `Locale.US` e a interface, os termos e os títulos de capítulo aparecem em inglês.
 
 #### 4. Backup e restauração funcionando
 O botão "Data Backup" gera um ID e um código de troca de aparelho; "Change Device" restaura com eles. O protocolo original (`EasySaveHelper`) foi reimplementado: `upload`, `download` e `delete`, com resposta vazia para sucesso e `05` para não encontrado.
@@ -60,7 +60,7 @@ O APK é reassinado com uma chave própria (debug). Por isso não instala por ci
 
 ### Limitações conhecidas
 
-- **Idioma fixo em japonês**, independente do idioma do sistema (consequência do item 3).
+- **Idioma fixo** (japonês ou inglês, escolhido ao gerar o APK), independente do idioma do sistema (consequência do item 3).
 - **Recursos online não funcionam:** ranking, torneio, times, perguntas e respostas, compartilhamento do Story Maker, compras (Google Play Billing) e Google Play Games. Eles abrem vazios ou falham sem travar o jogo.
 - **Patches nativos (itens 5 e 6) só para arm64.** Em aparelhos antigos de 32 bits o jogo roda, mas sem esses dois.
 - **O backup é apagado junto com o app** (ao desinstalar ou limpar dados). Para trocar de aparelho, copie a pasta `savedata` para o novo (veja abaixo).
@@ -114,7 +114,7 @@ Coloque `apktool.jar` e `uber-apk-signer-1.3.0.jar` nesta pasta (ou passe `--apk
 python build.py trinity-seven-7-7.apk --sdk /caminho/do/android-sdk
 ```
 
-O script confere o SHA-256 do APK, instala o servidor embutido, aplica os patches e assina. O APK final fica em `out/Trinity7-offline.apk`. `--host` troca o endereço do servidor (ver abaixo).
+O script confere o SHA-256 do APK, instala o servidor embutido, aplica os patches e assina. O APK final fica em `out/Trinity7-offline.apk`. `--lang en` gera a versão em inglês (`out/Trinity7-offline-en.apk`); o padrão é `ja`. `--host` troca o endereço do servidor (ver abaixo).
 
 ### Servidor no PC (opcional)
 
