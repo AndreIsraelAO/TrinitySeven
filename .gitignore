@@ -1,0 +1,13 @@
+# Game files are copyrighted: never commit APKs, extracted assets or dumps
+*.apk
+*.idsig
+extracted/
+dump/
+build/
+tools/
+server/savedata/
+__pycache__/
+*.log
+*.png
+work/
+out/

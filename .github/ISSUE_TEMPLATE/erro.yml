@@ -1,0 +1,29 @@
+name: Relatar erro
+description: O jogo travou, mostrou erro ou algo não funciona como descrito no README
+labels: [bug]
+body:
+  - type: input
+    id: aparelho
+    attributes: {label: Modelo do celular, placeholder: Xiaomi Redmi Note 11}
+    validations: {required: true}
+  - type: input
+    id: android
+    attributes: {label: Versão do Android, placeholder: "13"}
+    validations: {required: true}
+  - type: input
+    id: idioma
+    attributes: {label: Idioma do sistema, placeholder: Português (Brasil)}
+    validations: {required: true}
+  - type: input
+    id: versao
+    attributes: {label: Versão do patch, placeholder: "0.9"}
+    validations: {required: true}
+  - type: textarea
+    id: passos
+    attributes: {label: Passos para reproduzir, description: "O que você fez, o que esperava e o que aconteceu."}
+    validations: {required: true}
+  - type: textarea
+    id: extras
+    attributes:
+      label: Screenshot e log (opcional)
+      description: "Arraste a imagem aqui. Para o log, rode `adb logcat -d > log.txt` logo após o erro e anexe o arquivo."
